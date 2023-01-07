@@ -11,4 +11,11 @@ transactions.post("/new", (req, res) => {
   res.json(transactionsArray.at(-1));
 });
 
+transactions.get("/:id", (req, res) => {
+  const { id } = req.params;
+  transactionsArray[id]
+    ? res.json(transactionsArray[id])
+    : res.status(404).json("Not Found");
+});
+
 module.exports = transactions;
