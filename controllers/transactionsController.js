@@ -13,8 +13,14 @@ transactions.post("/new", (req, res) => {
 
 transactions.get("/:id", (req, res) => {
   const { id } = req.params;
-  transactionsArray[id]
-    ? res.json(transactionsArray[id])
+  transactionsArray.some((transaction) => {
+    return transaction.id === id;
+  })
+    ? res.json(
+        transactionsArray.find((transaction) => {
+          return transaction.id === id;
+        })
+      )
     : res.status(404).json("Not Found");
 });
 
