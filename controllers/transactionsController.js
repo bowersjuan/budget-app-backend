@@ -24,4 +24,20 @@ transactions.get("/:id", (req, res) => {
     : res.status(404).json("Not Found");
 });
 
+transactions.put("/:id", (req, res) => {
+  const { id } = req.params;
+  let indexToChange = "";
+  const transactionToUpdate = transactionsArray.some((transaction, index) => {
+    indexToChange = index;
+    return transaction.id === id;
+  });
+  console.log(indexToChange);
+  if (transactionToUpdate) {
+    transactionsArray[indexToChange] = req.body;
+    res.json(transactionsArray[indexToChange]);
+  } else {
+    res.status(404).json("Not Found");
+  }
+});
+
 module.exports = transactions;
