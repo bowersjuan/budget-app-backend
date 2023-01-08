@@ -40,4 +40,20 @@ transactions.put("/:id", (req, res) => {
   }
 });
 
+transactions.delete("/:id", (req, res) => {
+  const { id } = req.params;
+  let indexToChange = "";
+  const transactionToUpdate = transactionsArray.some((transaction, index) => {
+    indexToChange = index;
+    return transaction.id === id;
+  });
+
+  if (transactionToUpdate) {
+    const deletedTransaction = transactionsArray.splice(indexToChange, 1);
+    res.send(deletedTransaction);
+  } else {
+    res.status(404).json("Not Found");
+  }
+});
+
 module.exports = transactions;
