@@ -31,7 +31,7 @@ transactions.put("/:id", (req, res) => {
     indexToChange = index;
     return transaction.id === id;
   });
-  console.log(indexToChange);
+
   if (transactionToUpdate) {
     transactionsArray[indexToChange] = req.body;
     res.json(transactionsArray[indexToChange]);
